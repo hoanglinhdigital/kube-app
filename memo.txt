@@ -20,4 +20,27 @@
 >kubectl label nodes i-0b37068442b990255 zone=ap-southeast-1a
 >kubectl label nodes i-0d4164fc8f75f54e9 zone=ap-southeast-1b
 
-#
+#Modify below file, change volume id
+vprodb-deployment.yaml
+
+#Apply file as below order
+>kubectl apply -f app-secret.yaml
+
+#Deploy DB and check log of pod until it ready:
+>kubectl apply -f db-deployment.yaml
+>kubectl get popds
+>kubectl logs <id of db pod>
+#Expect below log appear:
+/usr/sbin/mysqld: ready for connections. Version: '8.0.33'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+
+>kubectl apply -f db-CIP.yaml
+>kubectl apply -f memcache-deployment.yaml
+>kubectl apply -f memcache-CIP.yaml
+>kubectl apply -f mq-deployment.yaml
+>kubectl apply -f mq-CIP.yaml
+>kubectl apply -f vproapp-deployment.yaml
+>kubectl apply -f vproapp-service.yaml
+
+
+#clean up:
+>kubectl delete -f .
