@@ -1,0 +1,23 @@
+#Create volume
+>aws ec2 create-volume --availability-zone=ap-southeast-1a --size=5 --volume-type=gp3
+{
+    "AvailabilityZone": "ap-southeast-1a",
+    "CreateTime": "2023-10-01T04:50:37.000Z",
+    "Encrypted": false,
+    "Size": 5,
+    "SnapshotId": "",
+    "State": "creating",
+    "VolumeId": "vol-0d9b87a81adb304bb",
+    "Iops": 3000,
+    "Tags": [],
+    "VolumeType": "gp3",
+    "MultiAttachEnabled": false,
+    "Throughput": 125
+}
+
+#Add label for nodes
+>kubectl get nodes
+>kubectl label nodes i-0b37068442b990255 zone=ap-southeast-1a
+>kubectl label nodes i-0d4164fc8f75f54e9 zone=ap-southeast-1b
+
+#
